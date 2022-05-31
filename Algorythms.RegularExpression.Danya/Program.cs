@@ -1,126 +1,110 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Algorythms.RegularExpression
+namespace lab1
 {
-    static class ExpressionConverter
+    class Program
     {
-        public static void Convert(char[] str)
+        static void Main(string[] args)
         {
+            // (bcc)+|(bd*)+
             int i = 0;
             int state = 1;
 
-            //char[] str = Console.ReadLine().ToCharArray();
-            
-            while (i < str.Length)
+            string str = Console.ReadLine();
+            char[] s = str.ToCharArray();
+
+            while (i < s.Length)
             {
                 switch (state)
                 {
                     case 1:
-                        if (str[i].Equals('a'))
+                        if (s[i] == 'b')
                         {
                             state = 2;
-                            Console.Write("a");
-                        }
-                        else if (str[i].Equals('b'))
-                        {
-                            state = 3;
-                            Console.Write('b');
+                            Console.WriteLine();
+                            Console.Write("b");
                         }
                         else
                         {
                             Console.WriteLine();
                             state = 1;
                         }
-
                         i++;
                         break;
                     case 2:
-                        if (str[i].Equals('b'))
+                        if (s[i] == 'b')
+                        {
+                            state = 3;
+                            Console.WriteLine();
+                            Console.Write("b");
+                        }
+                        else if (s[i] == 'd')
+                        {
+                            state = 3;
+                            Console.Write("d");
+                        }
+                        else if (s[i] == 'c')
                         {
                             state = 4;
-                            Console.Write('b');
                         }
                         else
                         {
                             Console.WriteLine();
                             state = 1;
                         }
-
                         i++;
                         break;
                     case 3:
-                        if (str[i].Equals('c'))
+                        if (s[i] == 'b')
                         {
-                            Console.Write('c');
-                            state = 4;
+                            state = 2;
+                            Console.WriteLine();
+                            Console.Write("b");
                         }
-                        else if (str[i].Equals('b') || str[i].Equals('d'))
+                        else if (s[i] == 'd')
                         {
-                            Console.Write(str[i]);
-                            state = 5;
+                            state = 2;
+                            Console.Write("d");
                         }
                         else
                         {
                             Console.WriteLine();
                             state = 1;
                         }
-
                         i++;
                         break;
                     case 4:
-                        if (str[i].Equals('b'))
+                        if (s[i] == 'c')
                         {
-                            state = 6;
-                            Console.Write('b');
-                        }
-                        else if (str[i].Equals('a'))
-                        {
-                            state = 2;
-                            Console.Write('a');
+                            state = 5;
+                            Console.Write("cc");
                         }
                         else
                         {
                             Console.WriteLine();
                             state = 1;
                         }
-
                         i++;
                         break;
                     case 5:
-                        if (str[i].Equals('b') || str[i].Equals('d'))
+                        if (s[i] == 'b')
                         {
-                            state = 5;
-                            Console.Write(str[i]);
+                            state = 2;
+                            Console.Write("b");
                         }
                         else
                         {
                             Console.WriteLine();
                             state = 1;
                         }
+                        i++;
+                        break;
 
-                        i++;
-                        break;
-                    case 6:
-                        if (str[i].Equals('c'))
-                        {
-                            state = 4;
-                            Console.Write('c');
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                            state = 1;
-                        }
-                        i++;
-                        break;
                     default:
                         state = 1;
                         i++;
                         break;
                 }
-
             }
         }
     }
